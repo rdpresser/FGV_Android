@@ -11,6 +11,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        textView1.setText("Hellor World")
+        textView1.setText("Hello World")
     }
 }
