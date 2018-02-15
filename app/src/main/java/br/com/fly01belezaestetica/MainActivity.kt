@@ -20,6 +20,11 @@ class MainActivity : AppCompatActivity() {
                 gravity = Gravity.CENTER
                 padding = dip(20)
 
+                imageView(R.drawable.background_01).lparams(width = matchParent) {
+                    padding = dip(20)
+                    margin = dip(15)
+                }
+
                 textView {
                     gravity = Gravity.CENTER
                     text = "Login"
@@ -40,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
                 button("Entrar") {
                     onClick {
-                        toast( "Hey ${name.text}! Thank you for contacting us. We will get in touch with you soon.")
+                        toast("Hey ${name.text}! Thank you for contacting us. We will get in touch with you soon.")
                     }
                 }.lparams(dip(280), sp(80))
 
