@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Fly01 BelezaEstetica</string>
+    <string name="app_name">Fly01 Beleza &amp; Estética</string>
+    <string name="login_text">Login</string>
+    <string name="login_button">Entrar</string>
+    <string name="login_name_hint">Digite seu usuário</string>
+    <string name="login_password_hint">Digite sua senha</string>
 </resources>

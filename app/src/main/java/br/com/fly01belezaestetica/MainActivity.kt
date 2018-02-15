@@ -19,36 +19,40 @@ class MainActivity : AppCompatActivity() {
             verticalLayout {
                 gravity = Gravity.CENTER
                 padding = dip(20)
+                setBackgroundResource(R.drawable.background_01)
 
-                imageView(R.drawable.background_01).lparams(width = matchParent) {
+                imageView(R.drawable.beleza_estetica).lparams(width = matchParent) {
                     padding = dip(20)
                     margin = dip(15)
                 }
 
-                textView {
+                /*textView {
                     gravity = Gravity.CENTER
-                    text = "Login"
-                    textColor = Color.BLACK
+                    textColor = Color.WHITE
                     textSize = 24f
+                    textResource = R.string.login_text
                 }.lparams(width = matchParent) {
                     margin = dip(20)
-                }
+                }*/
 
                 val name = editText {
-                    hint = "Nome"
+                    hintResource = R.string.login_name_hint
+                    hintTextColor = Color.WHITE
+                    textColor = Color.WHITE
                 }
 
-                editText {
-                    hint = "Senha"
-                    lines = 3
+                val password = editText {
+                    hintResource = R.string.login_password_hint
+                    hintTextColor = Color.WHITE
+                    textColor = Color.WHITE
                 }
 
-                button("Entrar") {
+                button(R.string.login_button) {
+                    backgroundColor = Color.LTGRAY
                     onClick {
                         toast("Hey ${name.text}! Thank you for contacting us. We will get in touch with you soon.")
                     }
                 }.lparams(dip(280), sp(80))
-
             }
         }
     }
