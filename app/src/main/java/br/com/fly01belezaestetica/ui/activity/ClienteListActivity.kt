@@ -7,16 +7,16 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
 
-class IndexActivity : AppCompatActivity() {
+class ClienteListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         IndexActivityUI().setContentView(this)
     }
 
-    class IndexActivityUI(val listAdapter: NoteListAdapter) : AnkoComponent<IndexActivity> {
+    class ClienteListActivityUI(val listAdapter: NoteListAdapter) : AnkoComponent<ClienteListActivity> {
 
-        override fun createView(ui: AnkoContext<IndexActivity>) = with(ui) {
+        override fun createView(ui: AnkoContext<ClienteListActivity>) = with(ui) {
             linearLayout {
                 lparams(matchParent, matchParent)
 

@@ -1,4 +1,4 @@
-package br.com.fly01belezaestetica.ui.activities
+package br.com.fly01belezaestetica.ui.activity
 
 import android.content.Intent
 import android.graphics.Color
