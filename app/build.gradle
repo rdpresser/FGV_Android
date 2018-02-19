@@ -40,4 +40,5 @@ dependencies {
     implementation "org.jetbrains.anko:anko-recyclerview-v7-coroutines:$anko_version"
     implementation 'org.apache.olingo:odata-client-android:4.4.0'
     implementation 'org.apache.olingo:odata-ext:4.4.0'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
 }
