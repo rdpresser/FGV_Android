@@ -1,4 +1,4 @@
-package br.com.fly01belezaestetica
+package br.com.fly01belezaestetica.ui.activities
 
 import android.content.Intent
 import android.graphics.Color
@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.InputType
 import android.view.Gravity
-import br.com.fly01belezaestetica.activities.cliente.IndexActivity
+import br.com.fly01belezaestetica.R
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
