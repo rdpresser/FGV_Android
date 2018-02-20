@@ -41,4 +41,6 @@ dependencies {
     implementation "org.jetbrains.anko:anko-recyclerview-v7-coroutines:$anko_version"
     implementation 'org.apache.olingo:odata-client-android:4.4.0'
     implementation 'org.apache.olingo:odata-ext:4.4.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 }
