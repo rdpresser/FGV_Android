@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                 button(R.string.login_button) {
                     backgroundColor = Color.LTGRAY
                     onClick {
-                        ui.ctx.startActivity(Intent(ui.ctx, IndexActivity::class.java))
+                        ui.ctx.startActivity(Intent(ui.ctx, ClienteListActivity::class.java))
                         toast("Hey ${name.text}! Thank you for contacting us. We will get in touch with you soon.")
                     }
 

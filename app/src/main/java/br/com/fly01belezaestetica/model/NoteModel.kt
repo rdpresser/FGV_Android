@@ -6,4 +6,5 @@ package br.com.fly01belezaestetica.model
 
 data class NoteModel(
         val title: String,
-        val description: String)
+        val description: String,
+        val price: String)
