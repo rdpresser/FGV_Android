@@ -50,9 +50,10 @@ class ClienteListActivity : AppCompatActivity() {
                 val note_list_recyclerview = recyclerView {
                     lparams(matchParent, matchParent)
                     val orientation = LinearLayoutManager.VERTICAL
-                    layoutManager = LinearLayoutManager(ctx, orientation, true)
-                    //overScrollMode = View.OVER_SCROLL_NEVER
+                    layoutManager = LinearLayoutManager(ctx, orientation, false)
+                    overScrollMode = View.OVER_SCROLL_NEVER
                     adapter = listAdapter
+                    scrollToPosition(0)
                 }
             }
         }
