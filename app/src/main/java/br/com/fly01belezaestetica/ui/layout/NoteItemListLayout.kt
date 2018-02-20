@@ -31,15 +31,16 @@ class NoteItemListLayout : AnkoComponent<NoteListAdapter> {
                         orientation = LinearLayout.VERTICAL
                         textView("Titulo") {
                             id = R.id.txtTitleItem
-                            setTextAppearance(ctx, android.R.style.TextAppearance_Material_Large)
+                            textAppearance = android.R.style.TextAppearance_Material_Large
                         }
                         textView("Description") {
                             id = R.id.txtDescItem
-                            setTextAppearance(ctx, android.R.style.TextAppearance_Material_Small)
+                            textAppearance = android.R.style.TextAppearance_Material_Small
+                            //setTextAppearance(ctx, android.R.style.TextAppearance_Material_Small)
                         }
                         textView("Price") {
                             id = R.id.txtPriceItem
-                            setTextAppearance(ctx, android.R.style.TextAppearance_Material_Medium)
+                            textAppearance = android.R.style.TextAppearance_Material_Medium
                             textColorResource = R.color.colorAccent
                         }.lparams {
                             topMargin = dip(5)

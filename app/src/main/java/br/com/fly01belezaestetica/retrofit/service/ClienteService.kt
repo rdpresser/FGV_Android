@@ -1,0 +1,19 @@
+package br.com.fly01belezaestetica.retrofit.service
+
+import br.com.fly01belezaestetica.model.ClienteModel
+import retrofit2.Call
+import retrofit2.http.*
+
+/**
+ * Created by rodrigo.presser on 20/02/2018.
+ */
+interface ClienteService {
+    @GET("api/cliente?\$select=id,nome,documento&\$filter=documento ne null")
+    fun list(): Call<List<ClienteModel>>
+
+    @POST("api/cliente")
+    fun insert(@Body note: ClienteModel): Call<ClienteModel>
+
+    @PUT("api/cliente/{id}")
+    fun alter(@Body note: ClienteModel, @Path("id") id: Int): Call<ClienteModel>
+}
