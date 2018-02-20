@@ -18,25 +18,9 @@ class ClienteListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        data.add(NoteModel ("Title", "description", "234"))
-        data.add(NoteModel ("Title", "description", "234"))
-        data.add(NoteModel ("Title", "description", "234"))
-        data.add(NoteModel ("Title", "description", "234"))
-        data.add(NoteModel ("Title", "description", "234"))
-        data.add(NoteModel ("Title", "description", "234"))
-        data.add(NoteModel ("Title", "description", "234"))
-        data.add(NoteModel ("Title", "description", "234"))
-        data.add(NoteModel ("Title", "description", "234"))
-        data.add(NoteModel ("Title", "description", "234"))
-        data.add(NoteModel ("Title", "description", "234"))
-        data.add(NoteModel ("Title", "description", "234"))
-        data.add(NoteModel ("Title", "description", "234"))
-        data.add(NoteModel ("Title", "description", "234"))
-        data.add(NoteModel ("Title", "description", "234"))
-        data.add(NoteModel ("Title", "description", "234"))
-        data.add(NoteModel ("Title", "description", "234"))
-        data.add(NoteModel ("Title", "description", "234"))
-        data.add(NoteModel ("Title", "description", "234"))
+        (0..2000).map {
+            data.add(NoteModel ("Title $it", "description $it", "234,90"))
+        }
 
         ClienteListActivityUI(NoteListAdapter(data)).setContentView(this)
     }

@@ -45,7 +45,7 @@ class NoteItemListLayout : AnkoComponent<NoteListAdapter> {
                             topMargin = dip(5)
                             gravity = Gravity.END
                         }
-                    }
+                    }.lparams(width = dip(0), height = wrapContent, weight = 2f)
                 }
             }
         }
