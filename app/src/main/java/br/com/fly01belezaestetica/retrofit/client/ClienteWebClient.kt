@@ -26,7 +26,7 @@ class ClienteWebClient(private val context: Context) {
         val call = RetrofitInitializer().clienteService(authToken).list()
         call.enqueue(
                 callback(
-                        response = { it.defaultListResponse(success) },
+                        response = { it.defaultResponse(success) },
                         failure = { it.defaultFailure(failure) },
                         preExecute = preExecute,
                         finished = finished))

@@ -1,12 +1,9 @@
 package br.com.fly01belezaestetica.retrofit
 
-import android.content.Context
-import android.content.SharedPreferences
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import android.text.TextUtils
 import br.com.fly01belezaestetica.retrofit.service.ClienteService
-import br.com.fly01belezaestetica.utils.PreferenceHelper
 import okhttp3.OkHttpClient
 
 

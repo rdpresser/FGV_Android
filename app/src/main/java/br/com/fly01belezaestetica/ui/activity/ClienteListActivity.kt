@@ -27,7 +27,7 @@ class ClienteListActivity : AppCompatActivity() {
         ClienteWebClient(ctx).list(
                 success = {
                     //data.addAll(it)
-                    it.map {
+                    it.value.map {
                         data.add(NoteModel(it.nome, it.documento, it.id))
                     }
                     //configureList()

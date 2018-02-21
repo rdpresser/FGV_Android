@@ -1,6 +1,7 @@
 package br.com.fly01belezaestetica.retrofit.service
 
 import br.com.fly01belezaestetica.model.ClienteModel
+import br.com.fly01belezaestetica.model.PageResultModel
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -9,7 +10,7 @@ import retrofit2.http.*
  */
 interface ClienteService {
     @GET("api/cliente?\$select=id,nome,documento&\$filter=documento ne null")
-    fun list(): Call<List<ClienteModel>>
+    fun list(): Call<PageResultModel<ClienteModel>>
 
     @POST("api/cliente")
     fun insert(@Body note: ClienteModel): Call<ClienteModel>
