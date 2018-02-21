@@ -4,10 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import br.com.fly01belezaestetica.model.ClienteModel
-import br.com.fly01belezaestetica.retrofit.RetrofitInitializer
-import br.com.fly01belezaestetica.retrofit.callback
-import br.com.fly01belezaestetica.retrofit.defaultFailure
-import br.com.fly01belezaestetica.retrofit.defaultResponse
+import br.com.fly01belezaestetica.model.PageResultModel
+import br.com.fly01belezaestetica.retrofit.*
 import br.com.fly01belezaestetica.utils.PreferenceHelper
 
 /**
@@ -20,7 +18,7 @@ import br.com.fly01belezaestetica.utils.PreferenceHelper
 class ClienteWebClient(private val context: Context) {
     fun list(preExecute: () -> Unit = {},
              finished: () -> Unit = {},
-             success: (cliente: List<ClienteModel>) -> Unit = {},
+             success: (cliente: PageResultModel<ClienteModel>) -> Unit = {},
              failure: (throwable: Throwable) -> Unit = {}) {
 
         //val authToken = PreferenceHelper.customPrefs(context, "auth_token").toString()
@@ -28,7 +26,7 @@ class ClienteWebClient(private val context: Context) {
         val call = RetrofitInitializer().clienteService(authToken).list()
         call.enqueue(
                 callback(
-                        response = { it.defaultResponse(success) },
+                        response = { it.defaultListResponse(success) },
                         failure = { it.defaultFailure(failure) },
                         preExecute = preExecute,
                         finished = finished))
