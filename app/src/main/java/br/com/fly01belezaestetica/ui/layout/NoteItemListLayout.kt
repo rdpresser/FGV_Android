@@ -21,10 +21,12 @@ class NoteItemListLayout : AnkoComponent<NoteListAdapter> {
                     orientation = LinearLayout.HORIZONTAL
                     lparams(width = matchParent)
 
-                    imageView(R.mipmap.ic_launcher) {
+                    imageView(R.drawable.system_user) {
                         id = R.id.imgItem
-                        scaleType = ImageView.ScaleType.CENTER_CROP
-                    }.lparams(width = dip(0), height = dip(100), weight = 1f)
+                        scaleType = ImageView.ScaleType.FIT_START
+                        adjustViewBounds = true
+                        //https://robots.thoughtbot.com/android-imageview-scaletype-a-visual-guide
+                    }.lparams(width = dip(0), height = dip(80), weight = 1f)
 
                     linearLayout {
                         padding = dip(5)

@@ -44,7 +44,7 @@ class ClienteListActivity : AppCompatActivity() {
             linearLayout {
                 lparams(matchParent, matchParent)
 
-                val note_list_recyclerview = recyclerView {
+                recyclerView {
                     lparams(matchParent, matchParent)
                     val orientation = LinearLayoutManager.VERTICAL
                     layoutManager = LinearLayoutManager(ctx, orientation, false)
