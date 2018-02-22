@@ -3,46 +3,55 @@ package br.com.fly01belezaestetica.ui.activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.Toast
-import br.com.fly01belezaestetica.model.NoteModel
+import android.widget.ProgressBar
+import android.widget.TextView
+import br.com.fly01belezaestetica.R
+import br.com.fly01belezaestetica.R.id.progressBar
+import br.com.fly01belezaestetica.model.ClienteModel
 import br.com.fly01belezaestetica.retrofit.client.ClienteWebClient
-import br.com.fly01belezaestetica.ui.adapter.NoteListAdapter
+import br.com.fly01belezaestetica.ui.adapter.ClienteListAdapter
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
 
 class ClienteListActivity : AppCompatActivity() {
 
-    private val data: MutableList<NoteModel> = mutableListOf()
+    private val data: MutableList<ClienteModel> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        /*(0..2000).map {
-            data.add(NoteModel ("Title $it", "description $it", "234,90"))
-        }*/
-
         ClienteWebClient(ctx).list(
+                preExecute = {
+                    /*val progressBar = find<ProgressBar>(R.id.progressBar)
+                    progressBar.visibility = ProgressBar.VISIBLE*/
+                    longToast("preExecute")
+                },
                 success = {
-                    //data.addAll(it)
-                    it.value.map {
-                        data.add(NoteModel(it.nome, it.documento, it.id))
-                    }
-                    //configureList()
-                    ClienteListActivityUI(NoteListAdapter(data)).setContentView(this)
+                    data.addAll(it.value)
+                    ClienteListActivityUI(ClienteListAdapter(data)).setContentView(this)
                 },
                 failure = {
-                    Toast.makeText(this, "Falha ao buscar as notas", Toast.LENGTH_LONG).show()
+                    longToast("Falha ao buscar os clientes: ${it.message}")
+                },
+                finished = {
+                    /*val progressBar = find<ProgressBar>(R.id.progressBar)
+                    progressBar.visibility = ProgressBar.GONE*/
+                    longToast("finished")
                 })
     }
 
-    class ClienteListActivityUI(private val listAdapter: NoteListAdapter) : AnkoComponent<ClienteListActivity> {
+    class ClienteListActivityUI(private val listAdapter: ClienteListAdapter) : AnkoComponent<ClienteListActivity> {
 
         override fun createView(ui: AnkoContext<ClienteListActivity>): View = with(ui) {
             linearLayout {
                 lparams(matchParent, matchParent)
+
+                progressBar {
+                    visibility = ProgressBar.GONE
+                    id = R.id.progressBar
+                }.lparams (width = matchParent, height = wrapContent)
 
                 recyclerView {
                     lparams(matchParent, matchParent)

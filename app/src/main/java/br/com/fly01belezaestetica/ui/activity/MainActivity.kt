@@ -46,8 +46,9 @@ class MainActivity : AppCompatActivity() {
                 button(R.string.login_button) {
                     backgroundColor = Color.LTGRAY
                     onClick {
-                        ui.ctx.startActivity(Intent(ui.ctx, ClienteListActivity::class.java))
-                        toast("Hey ${name.text}! Thank you for contacting us. We will get in touch with you soon.")
+                        //ui.ctx.startActivity(Intent(ui.ctx, ClienteListActivity::class.java))
+                        ui.ctx.startActivity(intentFor<ClienteListActivity>())
+                        toast("Olá ${name.text}! Seja Bem Vindo(a)!.")
                     }
 
                 }.lparams(dip(280), sp(50))

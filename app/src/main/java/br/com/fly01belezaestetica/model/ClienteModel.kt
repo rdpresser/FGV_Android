@@ -6,4 +6,5 @@ package br.com.fly01belezaestetica.model
 data class ClienteModel (
         val id: String,
         val nome: String,
-        val documento: String)
+        val documento: String,
+        val email: String)
