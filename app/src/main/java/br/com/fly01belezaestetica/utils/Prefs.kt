@@ -7,11 +7,11 @@ import android.graphics.Color
 /**
  * Created by rodri on 22/02/2018.
  */
-class Prefs (context: Context) {
+class Prefs(context: Context) {
     private val PREFS_FILENAME = "br.com.fly01belezaestetica.ui.prefs"
     private val USER_NAME = "user_name"
     private val USER_PWD = "user_pwd"
-    private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0);
+    private var prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0)
 
     var userName: String
         get() = prefs.getString(USER_NAME, "")

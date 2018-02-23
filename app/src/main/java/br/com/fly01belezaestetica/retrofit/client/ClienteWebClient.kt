@@ -22,7 +22,7 @@ class ClienteWebClient(private val context: Context) {
              failure: (throwable: Throwable) -> Unit = {}) {
 
         //val authToken = PreferenceHelper.customPrefs(context, "auth_token").toString()
-        val authToken = "Bearer IIUZ3FJ1cqFekoUVAvmxgM21cjyp8hRUb8ZHNT6gWX-SP_uwttbq4_7s0fKES-3GrrNBFX5G3JDkeI_KAcCcMvT9THifhL8W0md7ZtXYrq3r5IXEaWxodFQELn9DQkJCSagt-lhel7bSZMoXwPkzH8kAworPpIP0EB1FEPW7hYkAGMwDx9_aN_J_94YfoGWmbwxGoVz4XuRXQ4m1MKCzTRC-u6yxOUi3z2JKEox9GLOBXr65QiKPK3K-5n2goVlcVkIlPVEfKf3rhCLd-Gf3lQkEQhIe-C1obtJ4jfihtzCx_-kdfj_MneUZAIwKo2WGtBGsqlUoxJpSNWE3K5NFo-Q01JUWuTGxBpbskbvmMX3CiHxyUQuUyNIemp9fVb-VBsPStSsNRGF3NsxyXXXFZ3oAvXR45ikxj3DYeCAi4oE"
+        val authToken = "Bearer eJ6dE86MVbOIhZsgiWzf7Uf_sba2paISDMgpWtMwk_JtiPrvYfkwkCVi6Wmp86rKWRnIHVegoLjlaCfEr68l517iaoTdsnhFVSMbiRPbTyBnYPZtQImtztCtfGxkj0DVHmoB2NnhLMBEqtFW14O2FEwzGWx62lD_i-_dDavevb0xgE_jivPksAIMQz9gyHzicOQeaUwp3L1wV8Qz7kzlD9Bvdx7L-Lz6ZDlcL0bl3N2v6YB93_AmzK_HLj05lF-bYtYic4qfC3Xcy5901BJsf8sqo6-A9C-NDO-5t-RxSuLCfzCk-SWM4etRVcWpvR_7u3UIdICIfhhQoZ2yzWiqOna-BZGa471L8tsz8_3Cbx6x37_i9Hcd0JyynWHD3ITvxa4kWtMbtFr5j9PBNWKzQpYO1lRxYFxQBPo-0nkcR6c"
         val call = RetrofitInitializer().clienteService(authToken).list()
         call.enqueue(
                 callback(
