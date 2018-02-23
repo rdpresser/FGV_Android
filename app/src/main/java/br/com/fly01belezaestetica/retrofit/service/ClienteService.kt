@@ -13,8 +13,8 @@ interface ClienteService {
     fun list(): Call<PageResultModel<ClienteModel>>
 
     @POST("api/cliente")
-    fun insert(@Body note: ClienteModel): Call<ClienteModel>
+    fun insert(@Body cliente: ClienteModel): Call<ClienteModel>
 
-    @PUT("api/cliente/{id}")
-    fun alter(@Body note: ClienteModel, @Path("id") id: Int): Call<ClienteModel>
+    @PUT("api/cliente({id})")
+    fun alter(@Body cliente: ClienteModel, @Path("id") id: String): Call<ClienteModel>
 }

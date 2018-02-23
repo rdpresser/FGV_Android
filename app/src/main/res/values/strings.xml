@@ -4,4 +4,8 @@
     <string name="login_button">Entrar</string>
     <string name="login_name_hint">Digite seu usuário</string>
     <string name="login_password_hint">Digite sua senha</string>
+    <string name="form_nome">Nome do Cliente</string>
+    <string name="form_telefone">Telefone</string>
+    <string name="form_documento">Documento</string>
+    <string name="form_email">Email</string>
 </resources>

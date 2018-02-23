@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ProgressBar
 import br.com.fly01belezaestetica.R
 import br.com.fly01belezaestetica.model.ClienteModel
 import br.com.fly01belezaestetica.retrofit.client.ClienteWebClient
 import br.com.fly01belezaestetica.ui.adapter.ClienteListAdapter
+import br.com.fly01belezaestetica.ui.dialog.ClienteDialog
 import br.com.fly01belezaestetica.utils.Prefs
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.floatingActionButton
@@ -34,7 +37,15 @@ class ClienteListActivity : AppCompatActivity() {
                 },
                 success = {
                     data.addAll(it.value)
-                    ClienteListActivityUI(ClienteListAdapter(data)).setContentView(this)
+                    ClienteListActivityUI(ClienteListAdapter(data,
+                            { cliente, position ->
+                                ClienteDialog(window.decorView as ViewGroup, this).alter(cliente) {
+                                    data[position] = it
+                                    ClienteListActivityUI(ClienteListAdapter(data, {_,_ -> Unit})).updateRecycler()
+                                }
+                                longToast("Posição clicada $cliente")
+                            })
+                    ).setContentView(this)
                 },
                 failure = {
                     longToast("Falha ao buscar os clientes: ${it.message}")
@@ -48,13 +59,26 @@ class ClienteListActivity : AppCompatActivity() {
 
     class ClienteListActivityUI(private val listAdapter: ClienteListAdapter) : AnkoComponent<ClienteListActivity> {
 
+        companion object {
+            private var rcCliente: RecyclerView? = null
+        }
+
+        fun updateRecycler(){
+            rcCliente!!.adapter = listAdapter
+        }
+
         override fun createView(ui: AnkoContext<ClienteListActivity>): View = with(ui) {
             linearLayout {
 
+                //TODO: utilizar relativeLayout para ajustar o floating button
                 floatingActionButton {
+                    /*onClick {
+                        longToast("Rodrigo Teste")
+                    }*/
                     id = R.id.fabAddCliente
                     imageResource = R.drawable.add
                     visibility = FloatingActionButton.VISIBLE
+
                 }.lparams {
                     width = wrapContent
                     height = wrapContent
@@ -69,7 +93,7 @@ class ClienteListActivity : AppCompatActivity() {
                     id = R.id.progressBar
                 }.lparams(width = matchParent, height = wrapContent)
 
-                recyclerView {
+                rcCliente = recyclerView {
                     lparams(matchParent, matchParent)
                     val orientation = LinearLayoutManager.VERTICAL
                     layoutManager = LinearLayoutManager(ctx, orientation, false)

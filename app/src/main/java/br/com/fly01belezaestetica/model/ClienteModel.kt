@@ -7,4 +7,5 @@ data class ClienteModel (
         val id: String,
         val nome: String,
         val documento: String,
-        val email: String)
+        val email: String,
+        val telefone: String)

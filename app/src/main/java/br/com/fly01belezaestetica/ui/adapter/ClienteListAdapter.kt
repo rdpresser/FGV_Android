@@ -14,7 +14,9 @@ import org.jetbrains.anko.find
  * Created by rodri on 21/02/2018.
  */
 
-class ClienteListAdapter(private val clienteList: List<ClienteModel>) : RecyclerView.Adapter<ClienteListAdapter.ViewHolder>() {
+class ClienteListAdapter(private val clienteList: List<ClienteModel>,
+                         private var onItemClickListener: (cliente: ClienteModel, position: Int) -> Unit)
+    : RecyclerView.Adapter<ClienteListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder =
             ViewHolder(ClienteItemLayout().createView(AnkoContext.Companion.create(parent!!.context, this, false)))
@@ -24,6 +26,9 @@ class ClienteListAdapter(private val clienteList: List<ClienteModel>) : Recycler
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder?.let {
             it.bindView(clienteList[position])
+            it.itemView.setOnClickListener {
+                onItemClickListener(clienteList[position], position)
+            }
         }
     }
 
