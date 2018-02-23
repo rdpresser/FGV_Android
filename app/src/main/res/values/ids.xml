@@ -9,4 +9,5 @@
     <item name="imgClienteItem" type="id">7</item>
     <item name="txtEmailItem" type="id">8</item>
     <item name="progressBar" type="id">9</item>
+    <item name="fabAddCliente" type="id">10</item>
 </resources>

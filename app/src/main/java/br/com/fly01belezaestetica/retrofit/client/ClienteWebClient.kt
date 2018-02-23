@@ -15,6 +15,8 @@ import br.com.fly01belezaestetica.utils.PreferenceHelper
  * https://futurestud.io/tutorials/oauth-2-on-android-with-retrofit
  * https://futurestud.io/tutorials/android-basic-authentication-with-retrofit
  */
+
+//TODO: Implementar chamadas, recebendo dados para a pagina atual, $top=PageSize&$skip=CurrentPage(Range de registros para ignorar)
 class ClienteWebClient(private val authToken: String) {
 
     fun list(preExecute: () -> Unit = {},

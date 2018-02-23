@@ -1,8 +1,10 @@
 package br.com.fly01belezaestetica.ui.activity
 
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Gravity
 import android.view.View
 import android.widget.ProgressBar
 import br.com.fly01belezaestetica.R
@@ -11,6 +13,7 @@ import br.com.fly01belezaestetica.retrofit.client.ClienteWebClient
 import br.com.fly01belezaestetica.ui.adapter.ClienteListAdapter
 import br.com.fly01belezaestetica.utils.Prefs
 import org.jetbrains.anko.*
+import org.jetbrains.anko.design.floatingActionButton
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
 class ClienteListActivity : AppCompatActivity() {
@@ -47,12 +50,24 @@ class ClienteListActivity : AppCompatActivity() {
 
         override fun createView(ui: AnkoContext<ClienteListActivity>): View = with(ui) {
             linearLayout {
+
+                floatingActionButton {
+                    id = R.id.fabAddCliente
+                    imageResource = R.drawable.add
+                    visibility = FloatingActionButton.VISIBLE
+                }.lparams {
+                    width = wrapContent
+                    height = wrapContent
+                    gravity = Gravity.RIGHT
+                    //margin = dip(15)
+                }
+
                 lparams(matchParent, matchParent)
 
                 progressBar {
                     visibility = ProgressBar.GONE
                     id = R.id.progressBar
-                }.lparams (width = matchParent, height = wrapContent)
+                }.lparams(width = matchParent, height = wrapContent)
 
                 recyclerView {
                     lparams(matchParent, matchParent)
@@ -62,6 +77,25 @@ class ClienteListActivity : AppCompatActivity() {
                     adapter = listAdapter
                     scrollToPosition(0)
                 }
+
+                /*<android.support.design.widget.FloatingActionButton
+            --android:id="@+id/fab_add_note"
+            --android:layout_width="wrap_content"
+            --android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            --android:layout_margin="15dp"
+            --android:src="@drawable/add" />*/
+
+
+
+                /*floatingActionButton {
+                    onClick { doSomething() }
+                    imageResource = R.drawable.ic_add_white_24dp // the plus sign
+                }.lparams {
+                    gravity = Gravity.BOTTOM or Gravity.END
+                    margin = dip(16)
+                }*/
             }
         }
     }
