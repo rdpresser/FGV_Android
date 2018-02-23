@@ -1,12 +1,12 @@
 package br.com.fly01belezaestetica.ui.activity
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.InputType
 import android.view.Gravity
 import br.com.fly01belezaestetica.R
+import br.com.fly01belezaestetica.utils.prefs
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
@@ -18,8 +18,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     class MainActivityUI : AnkoComponent<MainActivity> {
-
         override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
+
             verticalLayout {
                 gravity = Gravity.CENTER
                 padding = dip(20)
@@ -46,9 +46,11 @@ class MainActivity : AppCompatActivity() {
                 button(R.string.login_button) {
                     backgroundColor = Color.LTGRAY
                     onClick {
-                        //ui.ctx.startActivity(Intent(ui.ctx, ClienteListActivity::class.java))
+                        prefs.userName = name.text.toString()
+                        prefs.userPassword = password.text.toString()
+
                         ui.ctx.startActivity(intentFor<ClienteListActivity>())
-                        toast("Olá ${name.text}! Seja Bem Vindo(a)!.")
+                        toast("Olá ${prefs.userName}! Seja Bem Vindo(a)!.")
                     }
 
                 }.lparams(dip(280), sp(50))

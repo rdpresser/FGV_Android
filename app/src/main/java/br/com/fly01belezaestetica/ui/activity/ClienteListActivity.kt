@@ -24,9 +24,9 @@ class ClienteListActivity : AppCompatActivity() {
 
         ClienteWebClient(ctx).list(
                 preExecute = {
-                    /*val progressBar = find<ProgressBar>(R.id.progressBar)
-                    progressBar.visibility = ProgressBar.VISIBLE*/
-                    longToast("preExecute")
+                    /*val progressBar = this.find<ProgressBar>(R.id.progressBar)
+                    progressBar.visibility = ProgressBar.VISIBLE
+                    longToast("preExecute")*/
                 },
                 success = {
                     data.addAll(it.value)
@@ -38,7 +38,7 @@ class ClienteListActivity : AppCompatActivity() {
                 finished = {
                     /*val progressBar = find<ProgressBar>(R.id.progressBar)
                     progressBar.visibility = ProgressBar.GONE*/
-                    longToast("finished")
+                    //longToast("finished")
                 })
     }
 
