@@ -1,6 +1,5 @@
 package br.com.fly01belezaestetica.ui.activity
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -8,9 +7,9 @@ import android.text.InputType
 import android.view.Gravity
 import android.widget.TextView
 import br.com.fly01belezaestetica.R
-import br.com.fly01belezaestetica.utils.App
+import br.com.fly01belezaestetica.model.LoginModel
+import br.com.fly01belezaestetica.retrofit.client.LoginWebClient
 import br.com.fly01belezaestetica.utils.Prefs
-import br.com.fly01belezaestetica.utils.prefs
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
@@ -21,10 +20,10 @@ class MainActivity : AppCompatActivity() {
         MainActivityUI().setContentView(this)
     }
 
-    class MainActivityUI() : AnkoComponent<MainActivity> {
+    class MainActivityUI : AnkoComponent<MainActivity> {
 
         override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
-            val prefs = Prefs(ui.ctx)
+            var prefs: Prefs?
 
             verticalLayout {
                 gravity = Gravity.CENTER
@@ -54,12 +53,32 @@ class MainActivity : AppCompatActivity() {
                 button(R.string.login_button) {
                     backgroundColor = Color.LTGRAY
                     onClick {
-                        prefs!!.userName = name.text.toString()
-                        prefs!!.userPassword = password.text.toString()
 
-                        //val prefs = ui.ctx.getSharedPreferences(PREFS_FILENAME, 0)
-                        ui.ctx.startActivity(intentFor<ClienteListActivity>())
-                        toast("Olá ${prefs!!.userName}! Seja Bem Vindo(a)!.")
+                        val loginModel = LoginModel(
+                                name.text.toString(),
+                                password.text.toString()) //TODO fazer o login primeiro, para resgatar o numero de serie.
+
+                        LoginWebClient().getAccessToken(
+                                preExecute = {
+
+                                },
+                                success = {
+                                    prefs = Prefs(ui.ctx)
+                                    prefs!!.userName = name.text.toString()
+                                    prefs!!.userPassword = password.text.toString()
+                                    prefs!!.accessToken = "${it.tokenType.capitalize()} ${it.accessToken}"
+
+                                    ui.ctx.startActivity(intentFor<ClienteListActivity>())
+                                    longToast("Olá ${prefs!!.userName}! Seja Bem Vindo(a)!.")
+                                },
+                                failure = {
+                                    longToast("Falha ao efetuar o Login: ${it.message}")
+                                },
+                                finished = {
+
+                                },
+                                loginModel = loginModel)
+
                     }
 
                 }.lparams(dip(280), sp(50))

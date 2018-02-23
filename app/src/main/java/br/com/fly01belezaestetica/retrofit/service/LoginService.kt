@@ -10,8 +10,8 @@ import retrofit2.http.FormUrlEncoded
  * Created by rodrigo.presser on 20/02/2018.
  */
 interface LoginService {
-    @FormUrlEncoded
     @POST("/token")
+    @FormUrlEncoded
     fun getAccessToken(
             @Field("grant_type") grantType: String,
             @Field("username") username: String,

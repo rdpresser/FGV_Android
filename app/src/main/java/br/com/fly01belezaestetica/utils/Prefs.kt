@@ -11,6 +11,7 @@ class Prefs(context: Context) {
     private val PREFS_FILENAME = "br.com.fly01belezaestetica.ui.prefs"
     private val USER_NAME = "user_name"
     private val USER_PWD = "user_pwd"
+    private val ACCESS_TOKEN = "access_token"
     private var prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0)
 
     var userName: String
@@ -20,4 +21,8 @@ class Prefs(context: Context) {
     var userPassword: String
         get() = prefs.getString(USER_PWD, "")
         set(value) = prefs.edit().putString(USER_PWD, value).apply()
+
+    var accessToken: String
+        get() = prefs.getString(ACCESS_TOKEN, "")
+        set(value) = prefs.edit().putString(ACCESS_TOKEN, value).apply()
 }

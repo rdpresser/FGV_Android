@@ -5,24 +5,25 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.ProgressBar
-import android.widget.TextView
 import br.com.fly01belezaestetica.R
-import br.com.fly01belezaestetica.R.id.progressBar
 import br.com.fly01belezaestetica.model.ClienteModel
 import br.com.fly01belezaestetica.retrofit.client.ClienteWebClient
 import br.com.fly01belezaestetica.ui.adapter.ClienteListAdapter
+import br.com.fly01belezaestetica.utils.Prefs
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
-
 
 class ClienteListActivity : AppCompatActivity() {
 
     private val data: MutableList<ClienteModel> = mutableListOf()
+    var prefs: Prefs? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ClienteWebClient(ctx).list(
+        prefs = Prefs(this.baseContext)
+
+        ClienteWebClient(prefs!!.accessToken).list(
                 preExecute = {
                     /*val progressBar = this.find<ProgressBar>(R.id.progressBar)
                     progressBar.visibility = ProgressBar.VISIBLE

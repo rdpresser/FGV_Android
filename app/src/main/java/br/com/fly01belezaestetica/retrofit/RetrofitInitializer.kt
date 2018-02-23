@@ -4,9 +4,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import android.text.TextUtils
 import br.com.fly01belezaestetica.retrofit.service.ClienteService
+import br.com.fly01belezaestetica.retrofit.service.LoginService
 import okhttp3.OkHttpClient
-
-
 
 /**
  * Created by rodrigo.presser on 20/02/2018.
@@ -43,4 +42,6 @@ class RetrofitInitializer {
     }
 
     fun clienteService(authToken: String) = createService(ClienteService::class.java, authToken)
+
+    fun loginService(authToken: String? = "") = createService(LoginService::class.java, authToken)
 }
