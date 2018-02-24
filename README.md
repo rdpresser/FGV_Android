@@ -8,3 +8,4 @@ Neste projeto foi feito o consumo em API utilizando Retrofit2, com as seguintes 
    - Ao clicar em um item é possível também alterar o registro
 
 A API consumida neste projeto utiliza o padrão de retornos do OData V4
+Neste projeto também foi utilizado o plugin ANKO Layouts
