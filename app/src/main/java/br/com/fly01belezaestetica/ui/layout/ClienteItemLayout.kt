@@ -31,22 +31,22 @@ class ClienteItemLayout : AnkoComponent<ClienteListAdapter> {
                     linearLayout {
                         padding = dip(5)
                         orientation = LinearLayout.VERTICAL
-                        textView("Titulo") {
+                        textView("Nome") {
                             id = R.id.txtNomeItem
                             textAppearance = android.R.style.TextAppearance_Material_Large
                         }
-                        textView("Description") {
+                        textView("Documento") {
                             id = R.id.txtDocumentoItem
                             textAppearance = android.R.style.TextAppearance_Material_Small
                             //setTextAppearance(ctx, android.R.style.TextAppearance_Material_Small)
                         }
-                        textView("Price") {
+                        textView("Email") {
                             id = R.id.txtEmailItem
                             textAppearance = android.R.style.TextAppearance_Material_Medium
                             textColorResource = R.color.colorPrimaryDark
                         }.lparams {
                             topMargin = dip(5)
-                            gravity = Gravity.END
+                            //gravity = Gravity.END
                         }
                     }.lparams(width = dip(0), height = wrapContent, weight = 2f)
                 }

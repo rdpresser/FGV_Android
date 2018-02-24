@@ -7,6 +7,7 @@ import br.com.fly01belezaestetica.model.ClienteModel
 import br.com.fly01belezaestetica.model.PageResultModel
 import br.com.fly01belezaestetica.retrofit.*
 import br.com.fly01belezaestetica.utils.PreferenceHelper
+import okhttp3.ResponseBody
 
 /**
  * Created by rodrigo.presser on 20/02/2018.
@@ -34,9 +35,9 @@ class ClienteWebClient(private val authToken: String) {
     }
 
     fun alter(cliente: ClienteModel,
-            preExecute: () -> Unit = {},
+             preExecute: () -> Unit = {},
              finished: () -> Unit = {},
-             success: (cliente: ClienteModel) -> Unit = {},
+             success: (cliente: ResponseBody) -> Unit = {},
              failure: (throwable: Throwable) -> Unit = {}) {
 
         val call = RetrofitInitializer().clienteService(authToken).alter(cliente, cliente.id)

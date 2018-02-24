@@ -12,6 +12,7 @@ import br.com.fly01belezaestetica.retrofit.client.ClienteWebClient
 import br.com.fly01belezaestetica.utils.Prefs
 import br.com.fly01belezaestetica.utils.prefs
 import kotlinx.android.synthetic.main.form_cliente.view.*
+import okhttp3.ResponseBody
 
 /**
  * Created by rodrigo.presser on 23/02/2018.
@@ -46,29 +47,49 @@ class ClienteDialog(
         telefoneField.setText(cliente.telefone)
         emailField.setText(cliente.email)
 
-        AlertDialog.Builder(context)
+
+        var dialog = AlertDialog.Builder(context)
                 .setTitle("Alterar Cliente")
                 .setView(createdView)
+                .setNegativeButton("Cancelar") { _, _ ->
+
+                }
                 .setPositiveButton("Salvar") { _, _ ->
+
                     val id = idField.text.toString()
                     val nome = nomeField.text.toString()
                     val documento = documentoField.text.toString()
                     val telefone = telefoneField.text.toString()
                     val email = emailField.text.toString()
 
-                    val alteredCliente = cliente.copy(id = id, nome = nome, documento = documento, telefone = telefone, email = email)
-                    prefs = Prefs(context)
+                    var validation = true
 
-                    ClienteWebClient(prefs!!.accessToken).alter(alteredCliente,
-                            success = { altered(it) },
-                            failure = {
-                                Toast.makeText(context,
-                                        "Falha ao alterar Cliente, Erro: ${it.message}",
-                                        Toast.LENGTH_LONG).show()
-                            },
-                            preExecute = preExecute,
-                            finished = finished)
+                    if (nome.isEmpty()) {
+                        Toast.makeText(context, "Nome é obrigatório", Toast.LENGTH_LONG).show()
+                        validation = false
+                    }
+
+                    if (telefone.isEmpty() && validation) {
+                        Toast.makeText(context, "Telefone é obrigatório", Toast.LENGTH_LONG).show()
+                        validation = false
+                    }
+
+                    if (validation) {
+                        val alteredCliente = cliente.copy(id = id, nome = nome, documento = documento, telefone = telefone, email = email)
+                        prefs = Prefs(context)
+
+                        ClienteWebClient(prefs!!.accessToken).alter(alteredCliente,
+                                success = { altered(alteredCliente) },
+                                failure = {
+                                    Toast.makeText(context,
+                                            "Falha ao alterar Cliente, Erro: ${it.message}",
+                                            Toast.LENGTH_LONG).show()
+                                },
+                                preExecute = preExecute,
+                                finished = finished)
+                    }
                 }
                 .show()
+
     }
 }

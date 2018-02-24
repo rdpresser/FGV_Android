@@ -37,15 +37,7 @@ class ClienteListActivity : AppCompatActivity() {
                 },
                 success = {
                     data.addAll(it.value)
-                    ClienteListActivityUI(ClienteListAdapter(data,
-                            { cliente, position ->
-                                ClienteDialog(window.decorView as ViewGroup, this).alter(cliente) {
-                                    data[position] = it
-                                    ClienteListActivityUI(ClienteListAdapter(data, {_,_ -> Unit})).updateRecycler()
-                                }
-                                longToast("Posição clicada $cliente")
-                            })
-                    ).setContentView(this)
+                    configureList()
                 },
                 failure = {
                     longToast("Falha ao buscar os clientes: ${it.message}")
@@ -57,52 +49,43 @@ class ClienteListActivity : AppCompatActivity() {
                 })
     }
 
+    fun configureList() {
+        ClienteListActivityUI(ClienteListAdapter(data,
+                { cliente, position ->
+                    ClienteDialog(window.decorView as ViewGroup, this).alter(cliente) {
+                        data[position] = it
+                        configureList()
+                    }
+                    longToast("Posição clicada $cliente")
+                })
+        ).setContentView(this)
+    }
+
+
     class ClienteListActivityUI(private val listAdapter: ClienteListAdapter) : AnkoComponent<ClienteListActivity> {
 
-        companion object {
-            private var rcCliente: RecyclerView? = null
-        }
-
-        fun updateRecycler(){
-            rcCliente!!.adapter = listAdapter
-        }
-
         override fun createView(ui: AnkoContext<ClienteListActivity>): View = with(ui) {
-            linearLayout {
+            relativeLayout {
+                lparams(width = matchParent, height = matchParent)
 
-                //TODO: utilizar relativeLayout para ajustar o floating button
-                floatingActionButton {
-                    /*onClick {
-                        longToast("Rodrigo Teste")
-                    }*/
-                    id = R.id.fabAddCliente
-                    imageResource = R.drawable.add
-                    visibility = FloatingActionButton.VISIBLE
+                linearLayout {
+                    lparams(matchParent, wrapContent)
 
-                }.lparams {
-                    width = wrapContent
-                    height = wrapContent
-                    gravity = Gravity.RIGHT
-                    //margin = dip(15)
-                }
+                    progressBar {
+                        visibility = ProgressBar.GONE
+                        id = R.id.progressBar
+                    }.lparams(width = matchParent, height = wrapContent)
 
-                lparams(matchParent, matchParent)
+                    recyclerView {
+                        lparams(matchParent, matchParent)
+                        val orientation = LinearLayoutManager.VERTICAL
+                        layoutManager = LinearLayoutManager(ctx, orientation, false)
+                        overScrollMode = View.OVER_SCROLL_NEVER
+                        adapter = listAdapter
+                        scrollToPosition(0)
+                    }
 
-                progressBar {
-                    visibility = ProgressBar.GONE
-                    id = R.id.progressBar
-                }.lparams(width = matchParent, height = wrapContent)
-
-                rcCliente = recyclerView {
-                    lparams(matchParent, matchParent)
-                    val orientation = LinearLayoutManager.VERTICAL
-                    layoutManager = LinearLayoutManager(ctx, orientation, false)
-                    overScrollMode = View.OVER_SCROLL_NEVER
-                    adapter = listAdapter
-                    scrollToPosition(0)
-                }
-
-                /*<android.support.design.widget.FloatingActionButton
+                    /*<android.support.design.widget.FloatingActionButton
             --android:id="@+id/fab_add_note"
             --android:layout_width="wrap_content"
             --android:layout_height="wrap_content"
@@ -111,15 +94,26 @@ class ClienteListActivity : AppCompatActivity() {
             --android:layout_margin="15dp"
             --android:src="@drawable/add" />*/
 
+                    //TODO: utilizar relativeLayout para ajustar o floating button
 
 
-                /*floatingActionButton {
-                    onClick { doSomething() }
-                    imageResource = R.drawable.ic_add_white_24dp // the plus sign
-                }.lparams {
-                    gravity = Gravity.BOTTOM or Gravity.END
-                    margin = dip(16)
+                }
+
+                floatingActionButton {
+                    /*onClick {
+                    longToast("Rodrigo Teste")
                 }*/
+                    id = R.id.fabAddCliente
+                    imageResource = R.drawable.add
+                    visibility = FloatingActionButton.VISIBLE
+
+                }.lparams {
+                    width = wrapContent
+                    height = wrapContent
+                    gravity = Gravity.RIGHT
+
+                    //margin = dip(15)
+                }
             }
         }
     }
