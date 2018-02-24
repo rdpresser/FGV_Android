@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.InputType
 import android.view.Gravity
+import android.widget.ProgressBar
 import android.widget.TextView
 import br.com.fly01belezaestetica.R
 import br.com.fly01belezaestetica.model.LoginModel
@@ -35,6 +36,10 @@ class MainActivity : AppCompatActivity() {
                     margin = dip(15)
                 }
 
+                val progressBar = progressBar {
+                    visibility = ProgressBar.GONE
+                }.lparams(width = matchParent, height = wrapContent)
+
                 val name = editText {
                     hintResource = R.string.login_name_hint
                     hintTextColor = Color.WHITE
@@ -60,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
                         LoginWebClient().getAccessToken(
                                 preExecute = {
-
+                                    progressBar.visibility = ProgressBar.VISIBLE
                                 },
                                 success = {
                                     prefs = Prefs(ui.ctx)
@@ -75,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                                     longToast("Falha ao efetuar o Login: ${it.message}")
                                 },
                                 finished = {
-
+                                    progressBar.visibility = ProgressBar.GONE
                                 },
                                 loginModel = loginModel)
 

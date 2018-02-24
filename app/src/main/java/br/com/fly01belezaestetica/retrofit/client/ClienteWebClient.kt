@@ -40,7 +40,22 @@ class ClienteWebClient(private val authToken: String) {
              success: (cliente: ResponseBody) -> Unit = {},
              failure: (throwable: Throwable) -> Unit = {}) {
 
-        val call = RetrofitInitializer().clienteService(authToken).alter(cliente, cliente.id)
+        val call = RetrofitInitializer().clienteService(authToken).alter(cliente, cliente.id!!)
+        call.enqueue(
+                callback(
+                        response = { it.defaultResponse(success) },
+                        failure = { it.defaultFailure(failure) },
+                        preExecute = preExecute,
+                        finished = finished))
+    }
+
+    fun insert(cliente: ClienteModel,
+               preExecute: () -> Unit = {},
+               finished: () -> Unit = {},
+               success: (cliente: ClienteModel) -> Unit = {},
+               failure: (throwable: Throwable) -> Unit = {}) {
+
+        val call = RetrofitInitializer().clienteService(authToken).insert(cliente)
         call.enqueue(
                 callback(
                         response = { it.defaultResponse(success) },

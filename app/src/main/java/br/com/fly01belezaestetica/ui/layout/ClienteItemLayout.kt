@@ -45,7 +45,7 @@ class ClienteItemLayout : AnkoComponent<ClienteListAdapter> {
                             textAppearance = android.R.style.TextAppearance_Material_Medium
                             textColorResource = R.color.colorPrimaryDark
                         }.lparams {
-                            topMargin = dip(5)
+                            topMargin = dip(6)
                             //gravity = Gravity.END
                         }
                     }.lparams(width = dip(0), height = wrapContent, weight = 2f)

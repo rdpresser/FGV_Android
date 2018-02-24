@@ -10,7 +10,7 @@ import retrofit2.http.*
  * Created by rodrigo.presser on 20/02/2018.
  */
 interface ClienteService {
-    @GET("api/cliente?\$select=id,nome,documento,email,telefone&\$count=true&\$filter=documento ne null and email ne null&\$orderby=nome asc")
+    @GET("api/cliente?\$select=id,nome,documento,email,telefone&\$orderby=nome asc")
     fun list(): Call<PageResultModel<ClienteModel>>
 
     @POST("api/cliente")

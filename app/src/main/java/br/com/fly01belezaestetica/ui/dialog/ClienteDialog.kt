@@ -52,7 +52,6 @@ class ClienteDialog(
                 .setTitle("Alterar Cliente")
                 .setView(createdView)
                 .setNegativeButton("Cancelar") { _, _ ->
-
                 }
                 .setPositiveButton("Salvar") { _, _ ->
 
@@ -60,10 +59,9 @@ class ClienteDialog(
                     val nome = nomeField.text.toString()
                     val documento = documentoField.text.toString()
                     val telefone = telefoneField.text.toString()
-                    val email = emailField.text.toString()
+                    var email = emailField.text.toString()
 
                     var validation = true
-
                     if (nome.isEmpty()) {
                         Toast.makeText(context, "Nome é obrigatório", Toast.LENGTH_LONG).show()
                         validation = false
@@ -71,6 +69,11 @@ class ClienteDialog(
 
                     if (telefone.isEmpty() && validation) {
                         Toast.makeText(context, "Telefone é obrigatório", Toast.LENGTH_LONG).show()
+                        validation = false
+                    }
+
+                    if (email.isEmpty() && validation) {
+                        Toast.makeText(context, "Email é obrigatório", Toast.LENGTH_LONG).show()
                         validation = false
                     }
 
@@ -91,5 +94,55 @@ class ClienteDialog(
                 }
                 .show()
 
+    }
+
+    fun add(preExecute: () -> Unit = {},
+            finished: () -> Unit = {},
+            created: (createdCliente: ClienteModel) -> Unit = {}) {
+        AlertDialog.Builder(context)
+                .setTitle("Adicionar Cliente")
+                .setView(createdView)
+                .setNegativeButton("Cancelar") { _, _ ->
+                }
+                .setPositiveButton("Salvar") { _, _ ->
+                    val nome = nomeField.text.toString()
+                    val documento = documentoField.text.toString()
+                    val telefone = telefoneField.text.toString()
+                    var email = emailField.text.toString()
+
+                    var validation = true
+                    if (nome.isEmpty()) {
+                        Toast.makeText(context, "Nome é obrigatório", Toast.LENGTH_LONG).show()
+                        validation = false
+                    }
+
+                    if (telefone.isEmpty() && validation) {
+                        Toast.makeText(context, "Telefone é obrigatório", Toast.LENGTH_LONG).show()
+                        validation = false
+                    }
+
+                    if (email.isEmpty() && validation) {
+                        Toast.makeText(context, "Email é obrigatório", Toast.LENGTH_LONG).show()
+                        validation = false
+                    }
+
+                    if (validation) {
+                        val createdCliente = ClienteModel(nome = nome, documento = documento, telefone = telefone, email = email)
+                        preExecute()
+                        prefs = Prefs(context)
+                        ClienteWebClient(prefs!!.accessToken).insert(createdCliente,
+                                success = {
+                                    created(it)
+                                },
+                                failure = {
+                                    Toast.makeText(context,
+                                            "Falha ao incluir Cliente, Erro: ${it.message}",
+                                            Toast.LENGTH_LONG).show()
+                                },
+                                preExecute = preExecute,
+                                finished = finished)
+                    }
+                }
+                .show()
     }
 }
