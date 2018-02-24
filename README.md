@@ -7,4 +7,4 @@ Neste projeto foi feito o consumo em API utilizando Retrofit2, com as seguintes 
    - Botão de Adicionar novo registro
    - Ao clicar em um item é possível também alterar o registro
 
-Esta api eu fiz ela utilizando o padrão de retornos do OData Versão 4.0
+A API consumida neste projeto utiliza o padrão de retornos do OData V4
